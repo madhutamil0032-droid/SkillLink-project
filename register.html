@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register | SkillLink</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.auth-page{background:#f3f8f5;min-height:100vh;color:#173b32}
+.auth-nav{display:flex;justify-content:space-between;align-items:center;padding:22px 8%;background:white;border-bottom:1px solid #e2ece6}
+.auth-logo{font-size:28px;font-weight:bold;color:#087f68;text-decoration:none}
+.auth-nav a:last-child{color:#173b32;text-decoration:none;font-weight:bold;font-size:14px}
+.auth-layout{max-width:1050px;margin:35px auto;padding:20px;display:grid;grid-template-columns:.9fr 1.1fr;gap:35px;align-items:center}
+.auth-intro{padding:20px}
+.auth-badge{display:inline-block;background:#dff5eb;color:#087f68;padding:10px 15px;border-radius:30px;font-size:12px;font-weight:bold;letter-spacing:1px;margin-bottom:22px}
+.auth-intro h1{font-size:43px;line-height:1.15;margin-bottom:20px}
+.auth-intro p{line-height:1.8;color:#64766f;font-size:15px}
+.auth-features{margin-top:25px;line-height:2.5;font-size:14px;list-style:none}
+.auth-features span{color:#087f68;font-weight:bold;margin-right:8px}
+.auth-card{background:white;padding:32px;border-radius:22px;box-shadow:0 12px 40px rgba(16,46,40,.08);border:1px solid #e7eee9}
+.auth-card h2{font-size:27px;margin-bottom:10px}
+.auth-subtitle{color:#718078;font-size:14px;line-height:1.6;margin-bottom:22px}
+.auth-group{margin-bottom:16px}
+.auth-group label{display:block;font-size:13px;font-weight:bold;margin-bottom:8px;color:#29483e}
+.auth-group input,.auth-group select{width:100%;padding:13px 14px;border:1px solid #dce6e0;border-radius:10px;font-size:14px;color:#173b32;background:#fff}
+.auth-group input:focus,.auth-group select:focus{outline:none;border-color:#087f68;box-shadow:0 0 0 3px rgba(8,127,104,.1)}
+.auth-roles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.auth-role input{position:absolute;opacity:0}
+.auth-role label{display:block;text-align:center;padding:14px 8px;border:1px solid #dce8e1;border-radius:12px;cursor:pointer;font-size:14px;font-weight:bold;color:#496057}
+.auth-role label span{display:block;font-size:23px;margin-bottom:7px}
+.auth-role input:checked+label{border:2px solid #087f68;background:#eaf8f1;color:#087f68}
+.auth-provider-fields{display:none;background:#f7fbf8;padding:17px;border-radius:13px;border:1px solid #e0eee5;margin-bottom:18px}
+.auth-provider-fields h3{font-size:16px;margin-bottom:15px;color:#087f68}
+.auth-password-wrap{position:relative}
+.auth-password-wrap input{padding-right:70px}
+.auth-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);border:0;background:none;color:#087f68;font-weight:bold;cursor:pointer}
+.auth-terms{display:flex;align-items:flex-start;gap:9px;margin:18px 0;font-size:13px;line-height:1.6;color:#65756d}
+.auth-terms input{margin-top:4px;accent-color:#087f68}
+.auth-terms a,.auth-bottom a{color:#087f68;font-weight:bold;text-decoration:none}
+.auth-submit{width:100%;padding:15px;border:0;border-radius:11px;background:#087f68;color:white;font-size:15px;font-weight:bold;cursor:pointer}
+.auth-submit:hover{background:#066653}
+.auth-submit:disabled{opacity:.7;cursor:not-allowed}
+.auth-message{display:none;padding:12px;border-radius:9px;font-size:13px;line-height:1.6;margin-bottom:18px}
+.auth-message.error{display:block;background:#fff0f0;color:#b42318;border:1px solid #ffd1d1}
+.auth-bottom{text-align:center;font-size:14px;margin-top:22px;color:#718078}
+.auth-footer{text-align:center;padding:25px 15px;color:#7a8981;font-size:12px}
+@media(max-width:800px){.auth-layout{grid-template-columns:1fr;max-width:600px;margin:20px auto;gap:20px}.auth-intro{padding:10px}.auth-intro h1{font-size:35px}}
+@media(max-width:480px){.auth-nav{padding:18px 5%}.auth-logo{font-size:24px}.auth-nav a:last-child{font-size:12px}.auth-layout{padding:12px;margin:12px auto}.auth-intro h1{font-size:30px}.auth-card{padding:23px 18px}.auth-card h2{font-size:24px}.auth-role label{font-size:12px;padding:12px 5px}}
+</style>
+</head>
+<body class="auth-page">
+<header class="auth-nav">
+    <a href="index.html" class="auth-logo">SkillLink</a>
+    <a href="login.html">Already have an account? Login</a>
+</header>
+
+<main class="auth-layout">
+    <section class="auth-intro">
+        <span class="auth-badge">JOIN THE SKILLLINK COMMUNITY</span>
+        <h1>Your skills.<br>Your opportunities.</h1>
+        <p>Create your SkillLink account and connect with your local community. Find trusted service professionals or offer your skills to people who need them.</p>
+        <ul class="auth-features">
+            <li><span>✓</span> Simple and quick registration</li>
+            <li><span>✓</span> Connect with local service professionals</li>
+            <li><span>✓</span> Discover new opportunities</li>
+            <li><span>✓</span> Build trust through your profile</li>
+        </ul>
+    </section>
+
+    <section class="auth-card">
+        <h2>Create your account</h2>
+        <p class="auth-subtitle">Enter your details below to join SkillLink.</p>
+        <div id="formMessage" class="auth-message" role="status" aria-live="polite"></div>
+
+        <form id="registerForm" action="backend/register.php" method="POST">
+            <div class="auth-group">
+                <label>Choose your account type</label>
+                <div class="auth-roles">
+                    <div class="auth-role">
+                        <input type="radio" id="customer" name="role" value="customer" checked>
+                        <label for="customer"><span>👤</span>Customer</label>
+                    </div>
+                    <div class="auth-role">
+                        <input type="radio" id="provider" name="role" value="provider">
+                        <label for="provider"><span>🛠️</span>Service Provider</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" autocomplete="name" maxlength="100" required>
+            </div>
+            <div class="auth-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="example@email.com" autocomplete="email" maxlength="150" required>
+            </div>
+            <div class="auth-group">
+                <label for="phone">Mobile Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter 10-digit mobile number" autocomplete="tel" inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="10" required>
+            </div>
+
+            <div class="auth-provider-fields" id="providerFields">
+                <h3>Service Provider Details</h3>
+                <div class="auth-group">
+                    <label for="category">Service Category</label>
+                    <select id="category" name="category">
+                        <option value="">Select your service</option>
+                        <option value="Plumbing">Plumbing</option>
+                        <option value="Electrical">Electrical Work</option>
+                        <option value="Cleaning">Cleaning</option>
+                        <option value="Painting">Painting</option>
+                        <option value="Carpentry">Carpentry</option>
+                        <option value="Beauty">Beauty Services</option>
+                        <option value="Tutoring">Tutoring</option>
+                        <option value="Gardening">Gardening</option>
+                        <option value="Repair">Repair Services</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="auth-group">
+                    <label for="experience">Years of Experience</label>
+                    <select id="experience" name="experience">
+                        <option value="">Select experience</option>
+                        <option value="Fresher">Beginner / Fresher</option>
+                        <option value="1-2 years">1–2 years</option>
+                        <option value="3-5 years">3–5 years</option>
+                        <option value="5+ years">More than 5 years</option>
+                    </select>
+                </div>
+                <div class="auth-group">
+                    <label for="serviceArea">Service Area</label>
+                    <input type="text" id="serviceArea" name="serviceArea" placeholder="Enter your city or area" maxlength="150">
+                </div>
+            </div>
+
+            <div class="auth-group">
+                <label for="password">Password</label>
+                <div class="auth-password-wrap">
+                    <input type="password" id="password" name="password" placeholder="Create a password" autocomplete="new-password" minlength="8" required>
+                    <button type="button" class="auth-toggle" data-target="password">Show</button>
+                </div>
+            </div>
+            <div class="auth-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="auth-password-wrap">
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password" autocomplete="new-password" minlength="8" required>
+                    <button type="button" class="auth-toggle" data-target="confirmPassword">Show</button>
+                </div>
+            </div>
+
+            <div class="auth-terms">
+                <input type="checkbox" id="terms" name="terms" value="accepted" required>
+                <label for="terms">I agree to the <a href="#" id="termsLink">Terms and Conditions</a> and understand the SkillLink account registration process.</label>
+            </div>
+            <button type="submit" class="auth-submit" id="submitButton">Create Account</button>
+        </form>
+
+        <p class="auth-bottom">Already registered? <a href="login.html">Sign in here</a></p>
+    </section>
+</main>
+
+<footer class="auth-footer">&copy; <span id="year"></span> SkillLink. All rights reserved.</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("registerForm");
+    const customer = document.getElementById("customer");
+    const provider = document.getElementById("provider");
+    const providerFields = document.getElementById("providerFields");
+    const category = document.getElementById("category");
+    const experience = document.getElementById("experience");
+    const serviceArea = document.getElementById("serviceArea");
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirmPassword");
+    const message = document.getElementById("formMessage");
+    const submitButton = document.getElementById("submitButton");
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function showMessage(text) {
+        message.textContent = text;
+        message.className = "auth-message error";
+        message.style.display = "block";
+    }
+
+    function updateRoleFields() {
+        const isProvider = provider.checked;
+        providerFields.style.display = isProvider ? "block" : "none";
+        category.required = isProvider;
+        experience.required = isProvider;
+        serviceArea.required = isProvider;
+    }
+
+    customer.addEventListener("change", updateRoleFields);
+    provider.addEventListener("change", updateRoleFields);
+
+    document.querySelectorAll(".auth-toggle").forEach(function (button) {
+        button.addEventListener("click", function () {
+            const input = document.getElementById(button.dataset.target);
+            const visible = input.type === "password";
+            input.type = visible ? "text" : "password";
+            button.textContent = visible ? "Hide" : "Show";
+        });
+    });
+
+    form.addEventListener("input", function () {
+        message.textContent = "";
+        message.className = "auth-message";
+        message.style.display = "none";
+    });
+
+    form.addEventListener("submit", function (event) {
+        const fullName = document.getElementById("fullName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+
+        if (fullName.length < 2) {
+            event.preventDefault();
+            showMessage("Please enter your full name.");
+            return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            event.preventDefault();
+            showMessage("Please enter a valid email address.");
+            return;
+        }
+        if (!/^[6-9]\d{9}$/.test(phone)) {
+            event.preventDefault();
+            showMessage("Please enter a valid 10-digit Indian mobile number.");
+            return;
+        }
+        if (provider.checked && (!category.value || !experience.value || !serviceArea.value.trim())) {
+            event.preventDefault();
+            showMessage("Please complete all service provider details.");
+            return;
+        }
+        if (password.value.length < 8) {
+            event.preventDefault();
+            showMessage("Password must contain at least 8 characters.");
+            return;
+        }
+        if (password.value !== confirmPassword.value) {
+            event.preventDefault();
+            showMessage("Passwords do not match.");
+            confirmPassword.focus();
+            return;
+        }
+        if (!document.getElementById("terms").checked) {
+            event.preventDefault();
+            showMessage("Please accept the Terms and Conditions.");
+            return;
+        }
+
+        // Do not prevent default here. Valid form posts to backend/register.php.
+        submitButton.disabled = true;
+        submitButton.textContent = "Creating Account...";
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("role") === "provider") {
+        provider.checked = true;
+    } else if (params.get("role") === "customer") {
+        customer.checked = true;
+    }
+    if (params.has("error")) {
+        showMessage(params.get("error"));
+    }
+
+    updateRoleFields();
+
+    document.getElementById("termsLink").addEventListener("click", function (event) {
+        event.preventDefault();
+        showMessage("Add a Terms and Conditions page before publishing the website.");
+    });
+});
+</script>
+</body>
+</html>

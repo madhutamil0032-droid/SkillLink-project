@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | SkillLink</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f3f8f5;color:#173b32;min-height:100vh;display:flex;flex-direction:column}
+header{padding:22px 8%;background:white;border-bottom:1px solid #e2ece6;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:28px;font-weight:bold;color:#087f68;text-decoration:none}
+header a:last-child{color:#173b32;text-decoration:none;font-weight:bold;font-size:14px}
+main{width:min(460px,calc(100% - 30px));margin:55px auto;flex:1}
+.card{background:white;border:1px solid #e4eee7;border-radius:20px;padding:34px;box-shadow:0 12px 35px rgba(16,46,40,.07)}
+h1{font-size:30px;margin-bottom:10px}
+.subtitle{color:#718078;font-size:14px;line-height:1.6;margin-bottom:24px}
+.group{margin-bottom:18px}
+label{display:block;font-size:13px;font-weight:bold;margin-bottom:8px}
+input{width:100%;padding:14px;border:1px solid #dce6e0;border-radius:10px;font-size:14px}
+input:focus{outline:none;border-color:#087f68;box-shadow:0 0 0 3px rgba(8,127,104,.1)}
+.password-wrap{position:relative}
+.password-wrap input{padding-right:65px}
+.toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);border:0;background:none;color:#087f68;font-weight:bold;cursor:pointer}
+button[type=submit]{width:100%;padding:15px;border:0;border-radius:10px;background:#087f68;color:white;font-weight:bold;font-size:15px;cursor:pointer}
+button[type=submit]:hover{background:#066653}
+.message{display:none;padding:12px;border-radius:9px;margin-bottom:18px;font-size:13px;line-height:1.6}
+.message.error{display:block;background:#fff0f0;color:#b42318;border:1px solid #ffd1d1}
+.message.success{display:block;background:#eaf8f1;color:#087f68;border:1px solid #bde8d3}
+.bottom{text-align:center;font-size:14px;color:#718078;margin-top:22px}
+.bottom a{color:#087f68;font-weight:bold;text-decoration:none}
+footer{text-align:center;padding:22px;color:#7a8981;font-size:12px}
+@media(max-width:480px){header{padding:18px 5%}.card{padding:25px 20px}}
+</style>
+</head>
+<body>
+<header>
+    <a class="logo" href="index.html">SkillLink</a>
+    <a href="register.html">Create account</a>
+</header>
+
+<main>
+    <section class="card">
+        <h1>Welcome back</h1>
+        <p class="subtitle">Log in to your SkillLink account to continue.</p>
+
+        <div id="message" class="message" role="status" aria-live="polite"></div>
+
+        <form action="backend/login.php" method="POST" id="loginForm">
+            <div class="group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email"
+                       placeholder="example@email.com" autocomplete="email" required>
+            </div>
+
+            <div class="group">
+                <label for="password">Password</label>
+                <div class="password-wrap">
+                    <input type="password" id="password" name="password"
+                           placeholder="Enter your password"
+                           autocomplete="current-password" required>
+                    <button type="button" class="toggle" id="togglePassword">Show</button>
+                </div>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p class="bottom">Don't have an account? <a href="register.html">Register here</a></p>
+    </section>
+</main>
+
+<footer>&copy; <span id="year"></span> SkillLink. All rights reserved.</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const params = new URLSearchParams(window.location.search);
+const message = document.getElementById("message");
+
+if (params.get("registered") === "success") {
+    message.textContent = "Registration successful! Please log in.";
+    message.className = "message success";
+} else if (params.get("loggedout") === "success") {
+    message.textContent = "You have logged out successfully.";
+    message.className = "message success";
+} else if (params.has("error")) {
+    message.textContent = params.get("error");
+    message.className = "message error";
+}
+
+document.getElementById("togglePassword").addEventListener("click", function () {
+    const input = document.getElementById("password");
+    const visible = input.type === "password";
+    input.type = visible ? "text" : "password";
+    this.textContent = visible ? "Hide" : "Show";
+});
+
+document.getElementById("loginForm").addEventListener("submit", function () {
+    const button = this.querySelector('button[type="submit"]');
+    button.disabled = true;
+    button.textContent = "Logging in...";
+});
+</script>
+</body>
+</html>

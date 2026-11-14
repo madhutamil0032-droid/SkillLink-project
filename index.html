@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkillLink | Local Services, Connected</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+    <a class="brand" href="index.html"><span class="brand-mark">M</span>SkillLink</a>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">☰</button>
+    <nav class="nav-links" id="navLinks">
+        <a href="#services">Services</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="login.html">Login</a>
+        <a class="nav-cta" href="register.html?role=provider">Become a Provider</a>
+    </nav>
+</header>
+
+<main>
+<section class="hero">
+    <div class="hero-content">
+        <span class="eyebrow">LOCAL SKILLS. REAL CONNECTIONS.</span>
+        <h1>Find the right help.<br><span>Right around you.</span></h1>
+        <p class="hero-copy">Connect with local service professionals for everyday tasks, repairs, learning, and more.</p>
+
+        <form id="serviceSearch" class="search-form" action="backend/search_providers.php" method="GET">
+            <label class="search-field">
+                <span>What service do you need?</span>
+                <input id="serviceInput" name="service" type="text" placeholder="e.g. Plumbing, Cleaning" required>
+            </label>
+            <label class="search-field">
+                <span>Your area</span>
+                <input id="areaInput" name="location" type="text" placeholder="e.g. Erode, Thindal" required>
+            </label>
+            <button type="submit" class="primary-btn">Find Services <span aria-hidden="true">→</span></button>
+        </form>
+        <p id="searchMessage" class="search-message" aria-live="polite"></p>
+        <p class="trust-line">Simple to use · Local connections · More opportunities</p>
+    </div>
+    <div class="hero-visual" aria-label="SkillLink local service illustration">
+        <div class="visual-orbit orbit-one"></div>
+        <div class="visual-orbit orbit-two"></div>
+        <div class="visual-center"><span>SL</span><small>Local skills<br>connected</small></div>
+        <div class="float-card float-top"><span class="float-icon">🔧</span><span><strong>Home repairs</strong><small>Skilled local help</small></span></div>
+        <div class="float-card float-right"><span class="float-icon">🧹</span><span><strong>Cleaning</strong><small>Everyday support</small></span></div>
+        <div class="float-card float-bottom"><span class="float-icon">📚</span><span><strong>Tutoring</strong><small>Learn from locals</small></span></div>
+    </div>
+</section>
+
+<section class="section services-section" id="services">
+    <div class="section-heading">
+        <span class="eyebrow">EXPLORE CATEGORIES</span>
+        <h2>What can we help you with?</h2>
+        <p>Choose a service to start your search.</p>
+    </div>
+    <div class="services-grid">
+        <button class="service-card" type="button" data-service="Plumbing"><span class="service-icon">🔧</span><strong>Plumbing</strong><small>Leaks, taps and pipes</small></button>
+        <button class="service-card" type="button" data-service="Electrical"><span class="service-icon">💡</span><strong>Electrical</strong><small>Wiring and repairs</small></button>
+        <button class="service-card" type="button" data-service="Cleaning"><span class="service-icon">🧹</span><strong>Cleaning</strong><small>Home and office</small></button>
+        <button class="service-card" type="button" data-service="Painting"><span class="service-icon">🎨</span><strong>Painting</strong><small>Freshen up your space</small></button>
+        <button class="service-card" type="button" data-service="Carpentry"><span class="service-icon">🪚</span><strong>Carpentry</strong><small>Furniture and woodwork</small></button>
+        <button class="service-card" type="button" data-service="Beauty"><span class="service-icon">✨</span><strong>Beauty</strong><small>Personal care services</small></button>
+        <button class="service-card" type="button" data-service="Tutoring"><span class="service-icon">📚</span><strong>Tutoring</strong><small>Learning support</small></button>
+        <button class="service-card" type="button" data-service="Repair"><span class="service-icon">🛠️</span><strong>Repair Services</strong><small>Fix everyday items</small></button>
+    </div>
+</section>
+
+<section class="how-section" id="how-it-works">
+    <div class="section-heading">
+        <span class="eyebrow">HOW SKILLLINK WORKS</span>
+        <h2>Three simple steps</h2>
+        <p>Getting connected should be easy.</p>
+    </div>
+    <div class="steps-grid">
+        <article class="step-card"><span class="step-number">01</span><h3>Search</h3><p>Enter the service you need and your area.</p></article>
+        <article class="step-card"><span class="step-number">02</span><h3>Compare</h3><p>Explore matching local service providers.</p></article>
+        <article class="step-card"><span class="step-number">03</span><h3>Connect</h3><p>Use the provider's contact details to discuss the work.</p></article>
+    </div>
+</section>
+
+<section class="provider-cta">
+    <div><span class="eyebrow">HAVE A SKILL TO SHARE?</span><h2>Turn your skills into opportunities.</h2><p>Create a provider profile and help people in your local community.</p></div>
+    <a class="primary-btn" href="register.html?role=provider">Join as a Provider <span aria-hidden="true">→</span></a>
+</section>
+</main>
+
+<footer class="site-footer">
+    <a class="brand" href="index.html"><span class="brand-mark">S</span>SkillLink</a>
+    <p>Connecting local people with local skills.</p>
+    <span>&copy; <span id="year"></span> SkillLink. All rights reserved.</span>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
